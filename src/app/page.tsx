@@ -53,6 +53,12 @@ export default function Home() {
             </Button>
 
             <Button asChild variant="outline" size="lg">
+              <NextLink href="/dashboard">
+                Go to Dashboard
+              </NextLink>
+            </Button>
+
+            <Button asChild variant="outline" size="lg">
               <a
                 href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
                 target="_blank"

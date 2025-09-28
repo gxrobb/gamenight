@@ -2,6 +2,8 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import {
   Box,
   Button,
@@ -22,6 +24,7 @@ interface LoginFormProps {
 export default function LoginForm({ onSubmit }: LoginFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const {
     register,
@@ -36,16 +39,22 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
     setError(null);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Call the onSubmit prop if provided
-      if (onSubmit) {
-        onSubmit(data);
-      } else {
-        // Default behavior - just log the data
-        console.log('Login data:', data);
-        alert(`Welcome, ${data.username}!`);
+      // Use NextAuth.js signIn
+      const result = await signIn('credentials', {
+        username: data.username,
+        password: data.password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError('Invalid username or password');
+      } else if (result?.ok) {
+        // Call the onSubmit prop if provided
+        if (onSubmit) {
+          onSubmit(data);
+        }
+        // Always redirect to dashboard on successful login
+        router.push('/dashboard');
       }
     } catch (err) {
       setError('Login failed. Please try again.');

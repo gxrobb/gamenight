@@ -10,8 +10,11 @@ import {
   Avatar,
   IconButton,
   Collapsible,
+  Button,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 interface User {
   id: number;
@@ -26,6 +29,14 @@ interface UserHeaderProps {
 
 export default function UserHeader({ user }: UserHeaderProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await signOut({ 
+      callbackUrl: '/login',
+      redirect: true 
+    });
+  };
 
   return (
     <Box bg="white" shadow="sm" borderBottom="1px" borderColor="gray.200">
@@ -58,6 +69,14 @@ export default function UserHeader({ user }: UserHeaderProps) {
             <Badge variant="subtle">
               {user.isLoggedIn ? "Online" : "Offline"}
             </Badge>
+            
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
           </HStack>
         </Box>
 
@@ -104,6 +123,15 @@ export default function UserHeader({ user }: UserHeaderProps) {
               <Badge variant="subtle">
                 {user.isLoggedIn ? "Online" : "Offline"}
               </Badge>
+              
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={handleLogout}
+                w="full"
+              >
+                Logout
+              </Button>
             </HStack>
           </Box>
         </Collapsible.Content>

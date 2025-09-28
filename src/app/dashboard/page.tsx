@@ -1,12 +1,36 @@
+'use client';
+
 import { Box, Container, VStack, Heading, Text, Button } from '@chakra-ui/react';
 import UserHeader from '@/components/UserHeader';
-import NextLink from 'next/link';
-
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 export default function DashboardPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/login');
+    }
+  }, [status, router]);
+
+  if (status === 'loading') {
+    return (
+      <Box minH="100vh" bg="gray.50" display="flex" alignItems="center" justifyContent="center">
+        <Text>Loading...</Text>
+      </Box>
+    );
+  }
+
+  if (!session?.user) {
+    return null;
+  }
+
   const user = {
-    id: 1,
-    name: 'Test User',
-    email: 'test@gmail.com',
+    id: (session.user as any).id || '1',
+    name: session.user.name || 'User',
+    email: session.user.email || '',
     isLoggedIn: true
   };
 

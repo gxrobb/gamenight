@@ -8,6 +8,7 @@ import {
   HStack,
   Link,
 } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import { env } from '@/lib/env';
 
 export default function Home() {
@@ -46,13 +47,9 @@ export default function Home() {
 
           <HStack gap={4} wrap="wrap" justify="center">
             <Button asChild colorPalette="blue" size="lg">
-              <a
-                href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Deploy now
-              </a>
+              <NextLink href="/login">
+                Go to Login
+              </NextLink>
             </Button>
 
             <Button asChild variant="outline" size="lg">

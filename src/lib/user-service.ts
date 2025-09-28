@@ -1,52 +1,36 @@
 import { query } from './database';
 import bcrypt from 'bcryptjs';
+import { DatabaseUser, CreateUserData, LoginCredentials } from '@/types/user';
 
-export interface User {
-  id: string; // Changed to string for UUID
-  username: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  is_active: boolean;
-  created_at: Date;
-  updated_at: Date;
-}
-
-export interface CreateUserData {
-  username: string;
-  email: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-}
-
-export interface LoginCredentials {
-  username: string;
-  password: string;
-}
+// Re-export types for backward compatibility
+export type { DatabaseUser as User, CreateUserData, LoginCredentials };
 
 // Create a new user
-export async function createUser(userData: CreateUserData): Promise<User> {
-  const { username, email, password, first_name, last_name } = userData;
+export async function createUser(
+  userData: CreateUserData
+): Promise<DatabaseUser> {
+  const { username, email, password } = userData;
 
   // Hash the password
   const saltRounds = 12;
   const password_hash = await bcrypt.hash(password, saltRounds);
 
   const result = await query(
-    `INSERT INTO users (username, email, password_hash, first_name, last_name) 
-     VALUES ($1, $2, $3, $4, $5) 
-     RETURNING id, username, email, first_name, last_name, is_active, created_at, updated_at`,
-    [username, email, password_hash, first_name, last_name]
+    `INSERT INTO users (username, email, password_hash) 
+     VALUES ($1, $2, $3) 
+     RETURNING id, username, email, is_active, created_at, updated_at`,
+    [username, email, password_hash]
   );
 
   return result.rows[0];
 }
 
 // Find user by username
-export async function findUserByUsername(username: string): Promise<User | null> {
+export async function findUserByUsername(
+  username: string
+): Promise<DatabaseUser | null> {
   const result = await query(
-    'SELECT id, username, email, first_name, last_name, is_active, created_at, updated_at FROM users WHERE username = $1',
+    'SELECT id, username, email, is_active, created_at, updated_at FROM users WHERE username = $1',
     [username]
   );
 
@@ -54,9 +38,11 @@ export async function findUserByUsername(username: string): Promise<User | null>
 }
 
 // Find user by email
-export async function findUserByEmail(email: string): Promise<User | null> {
+export async function findUserByEmail(
+  email: string
+): Promise<DatabaseUser | null> {
   const result = await query(
-    'SELECT id, username, email, first_name, last_name, is_active, created_at, updated_at FROM users WHERE email = $1',
+    'SELECT id, username, email, is_active, created_at, updated_at FROM users WHERE email = $1',
     [email]
   );
 
@@ -64,9 +50,9 @@ export async function findUserByEmail(email: string): Promise<User | null> {
 }
 
 // Find user by ID
-export async function findUserById(id: string): Promise<User | null> {
+export async function findUserById(id: string): Promise<DatabaseUser | null> {
   const result = await query(
-    'SELECT id, username, email, first_name, last_name, is_active, created_at, updated_at FROM users WHERE id = $1',
+    'SELECT id, username, email, is_active, created_at, updated_at FROM users WHERE id = $1',
     [id]
   );
 
@@ -74,9 +60,12 @@ export async function findUserById(id: string): Promise<User | null> {
 }
 
 // Verify user password
-export async function verifyPassword(username: string, password: string): Promise<User | null> {
+export async function verifyPassword(
+  username: string,
+  password: string
+): Promise<DatabaseUser | null> {
   const result = await query(
-    'SELECT id, username, email, first_name, last_name, password_hash, is_active, created_at, updated_at FROM users WHERE username = $1',
+    'SELECT id, username, email, password_hash, is_active, created_at, updated_at FROM users WHERE username = $1',
     [username]
   );
 
@@ -92,12 +81,16 @@ export async function verifyPassword(username: string, password: string): Promis
   }
 
   // Remove password_hash from returned user object
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { password_hash, ...userWithoutPassword } = user;
   return userWithoutPassword;
 }
 
 // Update user
-export async function updateUser(id: string, updates: Partial<Omit<User, 'id' | 'created_at'>>): Promise<User | null> {
+export async function updateUser(
+  id: string,
+  updates: Partial<Omit<DatabaseUser, 'id' | 'created_at'>>
+): Promise<DatabaseUser | null> {
   const fields = [];
   const values = [];
   let paramCount = 1;
@@ -118,7 +111,7 @@ export async function updateUser(id: string, updates: Partial<Omit<User, 'id' | 
   const result = await query(
     `UPDATE users SET ${fields.join(', ')}, updated_at = CURRENT_TIMESTAMP 
      WHERE id = $${paramCount} 
-     RETURNING id, username, email, first_name, last_name, is_active, created_at, updated_at`,
+     RETURNING id, username, email, is_active, created_at, updated_at`,
     values
   );
 

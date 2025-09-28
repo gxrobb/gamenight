@@ -3,11 +3,10 @@
 
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
-    name VARCHAR(100) NOT NULL,
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -18,7 +17,7 @@ CREATE TABLE IF NOT EXISTS game_nights (
     id SERIAL PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     description TEXT,
-    host_user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    host_user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     scheduled_date TIMESTAMP NOT NULL,
     location VARCHAR(200),
     max_players INTEGER DEFAULT 8,
@@ -31,7 +30,7 @@ CREATE TABLE IF NOT EXISTS game_nights (
 CREATE TABLE IF NOT EXISTS game_night_participants (
     id SERIAL PRIMARY KEY,
     game_night_id INTEGER REFERENCES game_nights(id) ON DELETE CASCADE,
-    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     status VARCHAR(20) DEFAULT 'pending', -- pending, confirmed, declined
     joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(game_night_id, user_id)
@@ -54,7 +53,7 @@ CREATE TABLE IF NOT EXISTS game_night_games (
     id SERIAL PRIMARY KEY,
     game_night_id INTEGER REFERENCES game_nights(id) ON DELETE CASCADE,
     game_id INTEGER REFERENCES games(id) ON DELETE CASCADE,
-    added_by_user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    added_by_user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(game_night_id, game_id)
 );

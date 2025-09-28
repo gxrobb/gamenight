@@ -7,7 +7,10 @@ const dbConfig = {
   database: process.env.DB_NAME || 'gamenight',
   user: process.env.DB_USER || 'gamenight_user',
   password: process.env.DB_PASSWORD || 'gamenight_password',
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  ssl:
+    process.env.NODE_ENV === 'production'
+      ? { rejectUnauthorized: false }
+      : false,
 };
 
 // Create a connection pool
@@ -28,7 +31,7 @@ export async function testConnection() {
 }
 
 // Execute a query
-export async function query(text: string, params?: any[]) {
+export async function query(text: string, params?: unknown[]) {
   const client = await pool.connect();
   try {
     const result = await client.query(text, params);

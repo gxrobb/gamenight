@@ -56,7 +56,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
         // Always redirect to dashboard on successful login
         router.push('/dashboard');
       }
-    } catch (err) {
+    } catch {
       setError('Login failed. Please try again.');
     } finally {
       setIsLoading(false);
@@ -67,19 +67,13 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
     <Box w="lg" mx="auto" p={8} bg="white" borderRadius="lg" boxShadow="lg">
       <VStack gap={6} align="stretch">
         <Box textAlign="center">
-          <Heading size="lg">
-            Welcome Back
-          </Heading>
-          <Text mt={2}>
-            Sign in to your account
-          </Text>
+          <Heading size="lg">Welcome Back</Heading>
+          <Text mt={2}>Sign in to your account</Text>
         </Box>
 
         {error && (
           <Alert.Root>
-            <Alert.Content>
-              {error}
-            </Alert.Content>
+            <Alert.Content>{error}</Alert.Content>
           </Alert.Root>
         )}
 
@@ -90,12 +84,11 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
               <Input
                 id="username"
                 type="text"
-                placeholder="Enter your username" 
+                placeholder="Enter your username"
+                disabled={isLoading}
                 {...register('username')}
               />
-              <Field.ErrorText>
-                {errors.username?.message}
-              </Field.ErrorText>
+              <Field.ErrorText>{errors.username?.message}</Field.ErrorText>
             </Field.Root>
 
             <Field.Root invalid={!!errors.password}>
@@ -104,11 +97,10 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
                 id="password"
                 type="password"
                 placeholder="Enter your password"
+                disabled={isLoading}
                 {...register('password')}
               />
-              <Field.ErrorText>
-                {errors.password?.message}
-              </Field.ErrorText>
+              <Field.ErrorText>{errors.password?.message}</Field.ErrorText>
             </Field.Root>
 
             <Button

@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Container,
@@ -47,15 +48,11 @@ export default function Home() {
 
           <HStack gap={4} wrap="wrap" justify="center">
             <Button asChild colorPalette="blue" size="lg">
-              <NextLink href="/login">
-                Go to Login
-              </NextLink>
+              <NextLink href="/login">Go to Login</NextLink>
             </Button>
 
             <Button asChild variant="outline" size="lg">
-              <NextLink href="/dashboard">
-                Go to Dashboard
-              </NextLink>
+              <NextLink href="/dashboard">Go to Dashboard</NextLink>
             </Button>
 
             <Button asChild variant="outline" size="lg">

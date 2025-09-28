@@ -1,21 +1,14 @@
 'use client';
 
-import {
-  Box,
-  Container,
-  VStack,
-  Heading,
-  Text,
-  Spinner,
-} from '@chakra-ui/react';
+import {Box, Container, VStack, Heading, Text, Spinner} from '@chakra-ui/react';
 import UserHeader from '@/components/UserHeader';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { useUser } from '@/hooks/useUser';
+import {useSession} from 'next-auth/react';
+import {useRouter} from 'next/navigation';
+import {useEffect} from 'react';
+import {useUser} from '@/hooks/useUser';
 export default function DashboardPage() {
-  const { data: session, status } = useSession();
-  const { userData, loading: userLoading, error: userError } = useUser();
+  const {data: session, status} = useSession();
+  const {userData, loading: userLoading, error: userError} = useUser();
   const router = useRouter();
 
   useEffect(() => {
@@ -80,10 +73,10 @@ export default function DashboardPage() {
         isLoggedIn: true,
       }
     : {
-        id: (session.user as { id?: string }).id || '1',
+        id: (session.user as {id?: string}).id || '1',
         name: session.user.name || 'User',
         email: session.user.email || '',
-        username: (session.user as { username?: string }).username || '',
+        username: (session.user as {username?: string}).username || '',
         isLoggedIn: true,
       };
 

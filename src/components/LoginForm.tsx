@@ -1,9 +1,9 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import {useForm} from 'react-hook-form';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {signIn} from 'next-auth/react';
+import {useRouter} from 'next/navigation';
 import {
   Box,
   Button,
@@ -14,14 +14,14 @@ import {
   Alert,
   Field,
 } from '@chakra-ui/react';
-import { loginSchema, type LoginFormData } from '@/lib/schemas';
-import { useState } from 'react';
+import {loginSchema, type LoginFormData} from '@/lib/schemas';
+import {useState} from 'react';
 
 interface LoginFormProps {
   onSubmit?: (data: LoginFormData) => void;
 }
 
-export default function LoginForm({ onSubmit }: LoginFormProps) {
+export default function LoginForm({onSubmit}: LoginFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -29,7 +29,7 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });

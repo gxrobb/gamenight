@@ -1,9 +1,9 @@
 'use client';
-import { Box, Container, Center } from '@chakra-ui/react';
+import {Box, Container, Center} from '@chakra-ui/react';
 import LoginForm from '@/components/LoginForm';
 
 export default function LoginPage() {
-  const handleLogin = (data: { username: string; password: string }) => {
+  const handleLogin = (data: {username: string; password: string}) => {
     // Handle login logic here
     console.log('Login successful:', data);
     // You can redirect to dashboard or handle authentication here

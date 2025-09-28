@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, RenderOptions } from '@testing-library/react';
-import { ChakraUIProvider } from '@/providers/chakra-provider';
-import { NextAuthSessionProvider } from '@/providers/session-provider';
+import {render, RenderOptions} from '@testing-library/react';
+import {ChakraUIProvider} from '@/providers/chakra-provider';
+import {NextAuthSessionProvider} from '@/providers/session-provider';
 
 // Custom render function that includes providers
-const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
+const AllTheProviders = ({children}: {children: React.ReactNode}) => {
   return (
     <NextAuthSessionProvider>
       <ChakraUIProvider>{children}</ChakraUIProvider>
@@ -15,11 +15,11 @@ const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
 const customRender = (
   ui: React.ReactElement,
   options?: Omit<RenderOptions, 'wrapper'>
-) => render(ui, { wrapper: AllTheProviders, ...options });
+) => render(ui, {wrapper: AllTheProviders, ...options});
 
 // Re-export everything
 export * from '@testing-library/react';
-export { customRender as render };
+export {customRender as render};
 
 // Simple test to avoid "no tests" error
 describe('Test Utils', () => {

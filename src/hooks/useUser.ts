@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { User } from '@/types/user';
+import {useState, useEffect} from 'react';
+import {useSession} from 'next-auth/react';
+import {User} from '@/types/user';
 
 export function useUser() {
-  const { data: session, status } = useSession();
+  const {data: session, status} = useSession();
   const [userData, setUserData] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

@@ -1,9 +1,9 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import {screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useRouter } from 'next/navigation';
-import { render } from '../../__tests__/test-utils';
-import { mockPush, mockSignIn } from '../../__tests__/setup';
+import {useRouter} from 'next/navigation';
+import {render} from '../../__tests__/test-utils';
+import {mockPush, mockSignIn} from '../../__tests__/setup';
 import LoginForm from '../LoginForm';
 
 // Mock useRouter to return our mock
@@ -14,7 +14,7 @@ import LoginForm from '../LoginForm';
 describe('LoginForm', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    mockSignIn.mockResolvedValue({ ok: true, error: null });
+    mockSignIn.mockResolvedValue({ok: true, error: null});
   });
 
   describe('Form Validation', () => {
@@ -22,7 +22,7 @@ describe('LoginForm', () => {
       const user = userEvent.setup();
       render(<LoginForm />);
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {
@@ -38,7 +38,7 @@ describe('LoginForm', () => {
       const usernameInput = screen.getByLabelText(/username/i);
       await user.type(usernameInput, 'ab'); // Less than 3 characters
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {
@@ -55,7 +55,7 @@ describe('LoginForm', () => {
       const passwordInput = screen.getByLabelText(/password/i);
       await user.type(passwordInput, '12345'); // Less than 6 characters
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {
@@ -72,7 +72,7 @@ describe('LoginForm', () => {
       const usernameInput = screen.getByLabelText(/username/i);
       await user.type(usernameInput, 'a'.repeat(21)); // More than 20 characters
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {
@@ -89,7 +89,7 @@ describe('LoginForm', () => {
       const passwordInput = screen.getByLabelText(/password/i);
       await user.type(passwordInput, 'a'.repeat(101)); // More than 100 characters
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {
@@ -109,7 +109,7 @@ describe('LoginForm', () => {
       await user.type(usernameInput, 'testuser');
       await user.type(passwordInput, 'password123');
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {
@@ -134,7 +134,7 @@ describe('LoginForm', () => {
       await user.type(usernameInput, 'testuser');
       await user.type(passwordInput, 'password123');
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {
@@ -148,7 +148,7 @@ describe('LoginForm', () => {
 
     it('should show error message when login fails', async () => {
       const user = userEvent.setup();
-      mockSignIn.mockResolvedValue({ ok: false, error: 'CredentialsSignin' });
+      mockSignIn.mockResolvedValue({ok: false, error: 'CredentialsSignin'});
 
       render(<LoginForm />);
 
@@ -158,7 +158,7 @@ describe('LoginForm', () => {
       await user.type(usernameInput, 'testuser');
       await user.type(passwordInput, 'wrongpassword');
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {
@@ -170,7 +170,7 @@ describe('LoginForm', () => {
 
     it('should redirect to dashboard on successful login', async () => {
       const user = userEvent.setup();
-      mockSignIn.mockResolvedValue({ ok: true, error: null });
+      mockSignIn.mockResolvedValue({ok: true, error: null});
 
       render(<LoginForm />);
 
@@ -180,7 +180,7 @@ describe('LoginForm', () => {
       await user.type(usernameInput, 'testuser');
       await user.type(passwordInput, 'password123');
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {
@@ -194,7 +194,7 @@ describe('LoginForm', () => {
       mockSignIn.mockImplementation(
         () =>
           new Promise((resolve) =>
-            setTimeout(() => resolve({ ok: true, error: null }), 100)
+            setTimeout(() => resolve({ok: true, error: null}), 100)
           )
       );
 
@@ -206,7 +206,7 @@ describe('LoginForm', () => {
       await user.type(usernameInput, 'testuser');
       await user.type(passwordInput, 'password123');
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       // Should show loading state
@@ -219,7 +219,7 @@ describe('LoginForm', () => {
       mockSignIn.mockImplementation(
         () =>
           new Promise((resolve) =>
-            setTimeout(() => resolve({ ok: true, error: null }), 100)
+            setTimeout(() => resolve({ok: true, error: null}), 100)
           )
       );
 
@@ -227,7 +227,7 @@ describe('LoginForm', () => {
 
       const usernameInput = screen.getByLabelText(/username/i);
       const passwordInput = screen.getByLabelText(/password/i);
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
 
       await user.type(usernameInput, 'testuser');
       await user.type(passwordInput, 'password123');
@@ -253,7 +253,7 @@ describe('LoginForm', () => {
       await user.type(usernameInput, 'testuser');
       await user.type(passwordInput, 'password123');
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {
@@ -265,7 +265,7 @@ describe('LoginForm', () => {
 
     it('should clear error message when user starts typing again', async () => {
       const user = userEvent.setup();
-      mockSignIn.mockResolvedValue({ ok: false, error: 'CredentialsSignin' });
+      mockSignIn.mockResolvedValue({ok: false, error: 'CredentialsSignin'});
 
       render(<LoginForm />);
 
@@ -275,7 +275,7 @@ describe('LoginForm', () => {
       await user.type(usernameInput, 'testuser');
       await user.type(passwordInput, 'wrongpassword');
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {
@@ -298,7 +298,7 @@ describe('LoginForm', () => {
     it('should call custom onSubmit when provided', async () => {
       const user = userEvent.setup();
       const mockOnSubmit = jest.fn();
-      mockSignIn.mockResolvedValue({ ok: true, error: null });
+      mockSignIn.mockResolvedValue({ok: true, error: null});
 
       render(<LoginForm onSubmit={mockOnSubmit} />);
 
@@ -308,7 +308,7 @@ describe('LoginForm', () => {
       await user.type(usernameInput, 'testuser');
       await user.type(passwordInput, 'password123');
 
-      const submitButton = screen.getByRole('button', { name: /sign in/i });
+      const submitButton = screen.getByRole('button', {name: /sign in/i});
       await user.click(submitButton);
 
       await waitFor(() => {

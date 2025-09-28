@@ -1,8 +1,8 @@
 /// <reference types="jest" />
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
-import { render } from '../../__tests__/test-utils';
-import { mockPush, mockUseSession } from '../../__tests__/setup';
+import {screen, waitFor} from '@testing-library/react';
+import {render} from '../../__tests__/test-utils';
+import {mockPush, mockUseSession} from '../../__tests__/setup';
 import DashboardPage from '../dashboard/page';
 
 describe('DashboardPage', () => {
@@ -77,12 +77,12 @@ describe('DashboardPage', () => {
 
     it('should render nothing when no session user', () => {
       (mockUseSession as jest.Mock).mockReturnValue({
-        data: { user: null, expires: '2024-12-31' },
+        data: {user: null, expires: '2024-12-31'},
         status: 'authenticated',
         update: jest.fn(),
       });
 
-      const { container } = render(<DashboardPage />);
+      const {container} = render(<DashboardPage />);
       expect(container.firstChild).toBeNull();
     });
   });

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { UserSession } from '@/types/user';
+import {UserSession} from '@/types/user';
 
 // Mock Next.js router
 const mockPush = jest.fn();
@@ -42,7 +42,7 @@ jest.mock('next-auth/react', () => ({
   useSession: mockUseSession,
   signIn: mockSignIn,
   signOut: mockSignOut,
-  SessionProvider: ({ children }: { children: React.ReactNode }) => children,
+  SessionProvider: ({children}: {children: React.ReactNode}) => children,
 }));
 
 // Export the mock functions for use in tests

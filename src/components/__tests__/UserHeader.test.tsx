@@ -1,10 +1,10 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import {screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { useRouter } from 'next/navigation';
-import { render } from '../../__tests__/test-utils';
-import { mockPush, mockSignOut } from '../../__tests__/setup';
-import { UserSession } from '@/types/user';
+import {useRouter} from 'next/navigation';
+import {render} from '../../__tests__/test-utils';
+import {mockPush, mockSignOut} from '../../__tests__/setup';
+import {UserSession} from '@/types/user';
 import UserHeader from '../UserHeader';
 
 // Mock useRouter to return our mock
@@ -46,7 +46,7 @@ describe('UserHeader', () => {
     });
 
     it('should show offline status when user is not logged in', () => {
-      const offlineUser = { ...mockUser, isLoggedIn: false };
+      const offlineUser = {...mockUser, isLoggedIn: false};
       render(<UserHeader user={offlineUser} />);
 
       // Check that both desktop and mobile show offline status
@@ -177,7 +177,7 @@ describe('UserHeader', () => {
     });
 
     it('should show first letter of single name', () => {
-      const singleNameUser = { ...mockUser, username: 'john' };
+      const singleNameUser = {...mockUser, username: 'john'};
       render(<UserHeader user={singleNameUser} />);
 
       // Check that both desktop and mobile avatars show the first letter
@@ -186,7 +186,7 @@ describe('UserHeader', () => {
     });
 
     it('should handle empty name gracefully', () => {
-      const emptyNameUser = { ...mockUser, username: '' };
+      const emptyNameUser = {...mockUser, username: ''};
       render(<UserHeader user={emptyNameUser} />);
 
       // Should not crash and should show some fallback

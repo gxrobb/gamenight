@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+import {Pool} from 'pg';
 
 // Database connection configuration
 const dbConfig = {
@@ -8,9 +8,7 @@ const dbConfig = {
   user: process.env.DB_USER || 'gamenight_user',
   password: process.env.DB_PASSWORD || 'gamenight_password',
   ssl:
-    process.env.NODE_ENV === 'production'
-      ? { rejectUnauthorized: false }
-      : false,
+    process.env.NODE_ENV === 'production' ? {rejectUnauthorized: false} : false,
 };
 
 // Create a connection pool

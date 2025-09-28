@@ -10,7 +10,7 @@ import {
   Link,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { env } from '@/lib/env';
+import {env} from '@/lib/env';
 
 export default function Home() {
   return (
@@ -72,7 +72,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               color="blue.500"
-              _hover={{ textDecoration: 'underline' }}
+              _hover={{textDecoration: 'underline'}}
             >
               Learn
             </Link>
@@ -82,7 +82,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               color="blue.500"
-              _hover={{ textDecoration: 'underline' }}
+              _hover={{textDecoration: 'underline'}}
             >
               Examples
             </Link>
@@ -92,7 +92,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               color="blue.500"
-              _hover={{ textDecoration: 'underline' }}
+              _hover={{textDecoration: 'underline'}}
             >
               Go to nextjs.org →
             </Link>

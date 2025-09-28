@@ -1,15 +1,15 @@
-import { query } from './database';
+import {query} from './database';
 import bcrypt from 'bcryptjs';
-import { DatabaseUser, CreateUserData, LoginCredentials } from '@/types/user';
+import {DatabaseUser, CreateUserData, LoginCredentials} from '@/types/user';
 
 // Re-export types for backward compatibility
-export type { DatabaseUser as User, CreateUserData, LoginCredentials };
+export type {DatabaseUser as User, CreateUserData, LoginCredentials};
 
 // Create a new user
 export async function createUser(
   userData: CreateUserData
 ): Promise<DatabaseUser> {
-  const { username, email, password } = userData;
+  const {username, email, password} = userData;
 
   // Hash the password
   const saltRounds = 12;
@@ -82,7 +82,7 @@ export async function verifyPassword(
 
   // Remove password_hash from returned user object
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { password_hash, ...userWithoutPassword } = user;
+  const {password_hash, ...userWithoutPassword} = user;
   return userWithoutPassword;
 }
 

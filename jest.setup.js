@@ -1,6 +1,24 @@
 import '@testing-library/jest-dom';
 import './src/__tests__/setup';
 
+// Polyfill for Web APIs needed by Next.js API routes
+import {TextEncoder, TextDecoder} from 'util';
+
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
+
+// Mock NextResponse for API route testing
+jest.mock('next/server', () => ({
+  NextResponse: {
+    json: jest.fn((data, init) => ({
+      json: () => Promise.resolve(data),
+      status: init?.status || 200,
+      statusText: init?.statusText || 'OK',
+      headers: new Map(Object.entries(init?.headers || {})),
+    })),
+  },
+}));
+
 // Polyfill for structuredClone (needed for Chakra UI in Jest)
 if (typeof global.structuredClone === 'undefined') {
   global.structuredClone = (obj) => {

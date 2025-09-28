@@ -12,15 +12,15 @@ import {
   Collapsible,
   Button,
 } from '@chakra-ui/react';
-import { useState } from 'react';
-import { signOut } from 'next-auth/react';
-import { UserSession } from '@/types/user';
+import {useState} from 'react';
+import {signOut} from 'next-auth/react';
+import {UserSession} from '@/types/user';
 
 interface UserHeaderProps {
   user: UserSession;
 }
 
-export default function UserHeader({ user }: UserHeaderProps) {
+export default function UserHeader({user}: UserHeaderProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleLogout = async () => {
@@ -40,7 +40,7 @@ export default function UserHeader({ user }: UserHeaderProps) {
 
         {/* Desktop User Info - Hidden on medium screens and below */}
         <Box
-          display={{ base: 'none', md: 'block' }}
+          display={{base: 'none', md: 'block'}}
           data-testid="desktop-user-info"
         >
           <HStack gap={4}>
@@ -79,7 +79,7 @@ export default function UserHeader({ user }: UserHeaderProps) {
         </Box>
 
         {/* Mobile Hamburger Menu - Shown on medium screens and below */}
-        <Box display={{ base: 'block', md: 'none' }}>
+        <Box display={{base: 'block', md: 'none'}}>
           <IconButton
             aria-label="Toggle user menu"
             variant="ghost"
@@ -99,7 +99,7 @@ export default function UserHeader({ user }: UserHeaderProps) {
       >
         <Collapsible.Content>
           <Box
-            display={{ base: 'block', md: 'none' }}
+            display={{base: 'block', md: 'none'}}
             px={6}
             pb={4}
             borderTop="1px"

@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import type {Metadata} from 'next';
+import {Geist, Geist_Mono} from 'next/font/google';
 import './globals.css';
-import { ChakraUIProvider } from '@/providers/chakra-provider';
-import { NextAuthSessionProvider } from '@/providers/session-provider';
+import {ChakraUIProvider} from '@/providers/chakra-provider';
+import {NextAuthSessionProvider} from '@/providers/session-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

@@ -13,6 +13,7 @@ const customJestConfig = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  transformIgnorePatterns: ['node_modules/(?!(jose|openid-client|next-auth)/)'],
   globals: {
     'ts-jest': {
       useESM: true,

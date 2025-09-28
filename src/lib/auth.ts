@@ -1,7 +1,7 @@
-import { NextAuthOptions } from 'next-auth';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import {NextAuthOptions} from 'next-auth';
+import {PrismaAdapter} from '@next-auth/prisma-adapter';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { verifyPassword } from './user-service';
+import {verifyPassword} from './user-service';
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter({
@@ -13,8 +13,8 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        username: { label: 'Username', type: 'text' },
-        password: { label: 'Password', type: 'password' },
+        username: {label: 'Username', type: 'text'},
+        password: {label: 'Password', type: 'password'},
       },
       async authorize(credentials) {
         if (!credentials?.username || !credentials?.password) {
@@ -51,14 +51,14 @@ export const authOptions: NextAuthOptions = {
   },
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({token, user}) {
       if (user) {
         token.username = user.username;
       }
       return token;
     },
 
-    async session({ session, token }) {
+    async session({session, token}) {
       if (token) {
         session.user.id = token.sub;
         session.user.username = token.username;

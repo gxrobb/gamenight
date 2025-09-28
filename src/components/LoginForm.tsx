@@ -55,19 +55,19 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
   };
 
   return (
-    <Box maxW="md" mx="auto" p={8} bg="white" borderRadius="lg" boxShadow="lg">
+    <Box w="lg" mx="auto" p={8} bg="white" borderRadius="lg" boxShadow="lg">
       <VStack gap={6} align="stretch">
         <Box textAlign="center">
-          <Heading size="lg" color="gray.800">
+          <Heading size="lg">
             Welcome Back
           </Heading>
-          <Text color="gray.600" mt={2}>
+          <Text mt={2}>
             Sign in to your account
           </Text>
         </Box>
 
         {error && (
-          <Alert.Root colorPalette="red">
+          <Alert.Root>
             <Alert.Content>
               {error}
             </Alert.Content>
@@ -104,7 +104,6 @@ export default function LoginForm({ onSubmit }: LoginFormProps) {
 
             <Button
               type="submit"
-              colorPalette="blue"
               size="lg"
               loading={isLoading}
               loadingText="Signing in..."

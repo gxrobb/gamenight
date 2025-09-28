@@ -32,7 +32,7 @@ export default function UserHeader({ user }: UserHeaderProps) {
       {/* Main Header Row */}
       <HStack justify="space-between" align="center" px={6} py={4}>
         <HStack gap={4}>
-          <Heading size="md" color="gray.800">
+          <Heading size="md">
             GameNight
           </Heading>
         </HStack>
@@ -41,24 +41,21 @@ export default function UserHeader({ user }: UserHeaderProps) {
         <Box display={{ base: "none", md: "block" }}>
           <HStack gap={4}>
             <VStack align="end" gap={0}>
-              <Text fontSize="sm" fontWeight="medium" color="gray.800">
+              <Text fontSize="sm" fontWeight="medium">
                 {user.name}
               </Text>
-              <Text fontSize="xs" color="gray.500">
+              <Text fontSize="xs">
                 {user.email}
               </Text>
             </VStack>
             
             <Avatar.Root size="sm">
-              <Avatar.Fallback bg="blue.500" color="white">
+              <Avatar.Fallback>
                 {user.name.charAt(0).toUpperCase()}
               </Avatar.Fallback>
             </Avatar.Root>
             
-            <Badge 
-              colorPalette={user.isLoggedIn ? "green" : "red"} 
-              variant="subtle"
-            >
+            <Badge variant="subtle">
               {user.isLoggedIn ? "Online" : "Offline"}
             </Badge>
           </HStack>
@@ -90,24 +87,21 @@ export default function UserHeader({ user }: UserHeaderProps) {
             <HStack justify="space-between" align="center" py={3}>
               <HStack gap={3}>
                 <Avatar.Root size="sm">
-                  <Avatar.Fallback bg="blue.500" color="white">
+                  <Avatar.Fallback>
                     {user.name.charAt(0).toUpperCase()}
                   </Avatar.Fallback>
                 </Avatar.Root>
                 <VStack align="start" gap={0}>
-                  <Text fontSize="sm" fontWeight="medium" color="gray.800">
+                  <Text fontSize="sm" fontWeight="medium">
                     {user.name}
                   </Text>
-                  <Text fontSize="xs" color="gray.500">
+                  <Text fontSize="xs">
                     {user.email}
                   </Text>
                 </VStack>
               </HStack>
               
-              <Badge 
-                colorPalette={user.isLoggedIn ? "green" : "red"} 
-                variant="subtle"
-              >
+              <Badge variant="subtle">
                 {user.isLoggedIn ? "Online" : "Offline"}
               </Badge>
             </HStack>

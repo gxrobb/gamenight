@@ -17,10 +17,10 @@ export default function DashboardPage() {
       <Container maxW="container.xl" py={8}>
         <VStack gap={8} align="stretch">
           <Box textAlign="center">
-            <Heading size="xl" color="gray.800" mb={4}>
+            <Heading size="xl" mb={4}>
               Welcome to GameNight!
             </Heading>
-            <Text fontSize="lg" color="gray.600" maxW="600px" mx="auto">
+            <Text fontSize="lg" maxW="600px" mx="auto">
               Your ultimate destination for organizing and managing game nights with friends and family.
             </Text>
           </Box>
@@ -34,12 +34,12 @@ export default function DashboardPage() {
             borderColor="gray.200"
           >
             <VStack gap={6} align="stretch">
-              <Heading size="lg" color="gray.800">
+              <Heading size="lg">
                 Quick Actions
               </Heading>
               
               <VStack gap={4} align="stretch">
-                <Text fontSize="sm" color="gray.500" textAlign="center">
+                <Text fontSize="sm" textAlign="center">
                   Currently logged in as: <strong>{user.name}</strong> ({user.email})
                 </Text>
               </VStack>

@@ -21,6 +21,17 @@
 
 body {
   background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Ensure proper text color for accessibility */
+body,
+html {
+  color: #1a202c;
+  /* gray.800 equivalent for good contrast */
+}
+
+/* Let Chakra UI components handle their own text colors */
+[data-chakra-ui] {
+  color: unset;
 }
